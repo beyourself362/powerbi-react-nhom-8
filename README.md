@@ -16,11 +16,11 @@
 ## Cài đặt
 
 1. Clone repository:
-   git clone https://github.com/username/powerbi-react-nhom-8.git
-   cd powerbi-react-nhom-8
+- git clone https://github.com/beyourself362/powerbi-react-nhom-8
+- cd powerbi-react-nhom-8
 
 2. Cài dependencies:
-    npm install
+- npm install
 
 3. Tạo file .env ở root với nội dung:
     REACT_APP_TENANT_ID="<Tenant ID>"
@@ -33,8 +33,8 @@
     REACT_APP_USE_OLAP=true  # true để bật OLAP demo
 
 4. Khởi động dự án
-    npm start
-    Mở http:/localhost:3000 trong trình duyệt
+- npm start
+Mở http:/localhost:3000 trong trình duyệt
 
 Hướng dẫn sử dụng
 
