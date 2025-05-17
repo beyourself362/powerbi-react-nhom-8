@@ -1,0 +1,14 @@
+{
+  "dimensions": {
+    "Product": ["Prod A", "Prod B", "Prod C"],
+    "Region": ["North", "South", "East", "West"],
+    "Time": ["2021Q1", "2021Q2", "2021Q3", "2021Q4"]
+  },
+  "facts": [
+    {"Product": "Prod A", "Region": "North", "Time": "2021Q1", "Sales": 120},
+    {"Product": "Prod A", "Region": "North", "Time": "2021Q2", "Sales": 150},
+    {"Product": "Prod B", "Region": "South", "Time": "2021Q1", "Sales": 200},
+    {"Product": "Prod C", "Region": "East",  "Time": "2021Q3", "Sales": 90},
+    {"Product": "Prod B", "Region": "West",  "Time": "2021Q4", "Sales": 250}
+  ]
+}

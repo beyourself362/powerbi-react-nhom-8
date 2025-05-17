@@ -1,0 +1,7 @@
+{
+  "value": [
+    {"Column1": "Sample A1", "Column2": 123},
+    {"Column1": "Sample B2", "Column2": 456},
+    {"Column1": "Sample C3", "Column2": 789}
+  ]
+}

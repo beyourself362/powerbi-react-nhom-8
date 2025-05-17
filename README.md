@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+# Power BI React Demo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Giới thiệu
 
-## Available Scripts
+Ứng dụng mẫu dùng React để hiển thị dữ liệu từ Power BI API, hỗ trợ:
 
-In the project directory, you can run:
+- Lấy dữ liệu thật từ Power BI qua Azure AD (OAuth2)
+- Mock data cho phát triển giao diện khi chưa có token/API
+- OLAP Demo: Pivot, Drill Down, Roll Up, Slice & Dice
 
-### `npm start`
+## Yêu cầu
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Node.js >= v14, NPM hoặc Yarn
+- Azure AD App đã đăng ký (Client ID, Tenant ID, Client Secret)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Cài đặt
 
-### `npm test`
+1. Clone repository:
+   git clone https://github.com/username/powerbi-react-nhom-8.git
+   cd powerbi-react-nhom-8
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Cài dependencies:
+    npm install
 
-### `npm run build`
+3. Tạo file .env ở root với nội dung:
+    REACT_APP_TENANT_ID="<Tenant ID>"
+    REACT_APP_CLIENT_ID="<Client ID>"
+    REACT_APP_CLIENT_SECRET="<Client Secret>"
+    REACT_APP_WORKSPACE_ID="<Workspace ID>"
+    REACT_APP_DATASET_ID="<Dataset ID>"
+    REACT_APP_TABLE_NAME="<Table Name>"
+    REACT_APP_USE_MOCK=true  # true để dùng mock data
+    REACT_APP_USE_OLAP=true  # true để bật OLAP demo
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. Khởi động dự án
+    npm start
+    Mở http:/localhost:3000 trong trình duyệt
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Hướng dẫn sử dụng
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Sau khi đã khởi động ứng dụng, bạn có thể tương tác với các tính năng sau:
 
-### `npm run eject`
+1. Sử dụng Mock Data
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Bật REACT_APP_USE_MOCK=true trong .env để load dữ liệu từ src/mock.json.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Dùng mock data để phát triển giao diện khi chưa có token/API thật.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Mở DevTools, kiểm tra console.log(rows) và console.log(process.env.REACT_APP_USE_MOCK) để debug.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2. Kết nối Power BI API thật
 
-## Learn More
+Đặt REACT_APP_USE_MOCK=false và cung cấp giá trị hợp lệ cho các biến môi trường: REACT_APP_TENANT_ID, REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET, REACT_APP_WORKSPACE_ID, REACT_APP_DATASET_ID, REACT_APP_TABLE_NAME.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Ứng dụng sẽ tự động lấy access_token qua MSAL và gọi Power BI REST API.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Mở DevTools, xem network call đến api.powerbi.com và kiểm tra header Authorization.
 
-### Code Splitting
+3. Tuỳ chỉnh giao diện
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Sửa src/index.css hoặc component CSS/module để cập nhật style.
 
-### Analyzing the Bundle Size
+Import CSS mới bằng import './index.css'; ở src/index.js hoặc App.js.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Khởi động lại server (npm start) sau khi chỉnh sửa để áp dụng thay đổi.
 
-### Making a Progressive Web App
+4. OLAP Demo (Pivot Table)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Bật REACT_APP_USE_OLAP=true trong .env.
 
-### Advanced Configuration
+Component OlapDemo sẽ xuất hiện dưới bảng dữ liệu.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Pivot: kéo-thả trường trong Row Labels và Column Labels để hoán đổi.
 
-### Deployment
+Drill Down/Roll Up: sử dụng nút mở rộng/collapse trên nhóm dimension.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Slice & Dice: kéo trường vào Filter, chọn giá trị để lọc.
 
-### `npm run build` fails to minify
+Aggregator: chọn Sum, Average, Count… từ dropdown.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Renderer: đổi view sang Heatmap, Bar Chart, Line Chart,… để demo.
+
+Mọi thay đổi đều tự động phản ánh trên giao diện; có thể sao chép state JSON ở cuối pivot để lưu cấu hình.
+
+License
+
+MIT © [Hung Vu]
