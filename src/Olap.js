@@ -3,7 +3,7 @@ import PivotTableUI from 'react-pivottable/PivotTableUI';
 import 'react-pivottable/pivottable.css';
 import olapData from './olapMock.json';
 
-export default function OlapDemo() {
+export default function Olap() {
   const [pivotState, setPivotState] = React.useState({
     data: olapData.facts.map(f => ({
       Product: f.Product,
@@ -20,7 +20,7 @@ export default function OlapDemo() {
 
   return (
     <div>
-      <h2>OLAP Demo: Pivot Table</h2>
+      <h2>OLAP: Pivot Table</h2>
       <PivotTableUI
         data={pivotState.data}
         onChange={s => setPivotState(s)}

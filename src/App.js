@@ -4,7 +4,7 @@ import axios from 'axios';
 import { loginRequest } from './authConfig';
 // Import mock data nếu dùng
 import mockData from './mock.json';
-import OlapDemo from './Olap';
+import Olap from './Olap';
 
 function App() {
   const { instance, accounts } = useMsal();
@@ -20,10 +20,21 @@ function App() {
     }
 
     // Gọi API thật nếu không mock
+    // Nếu chưa có active account, thực hiện login
+    if (!instance.getActiveAccount()) {
+      instance.loginPopup(loginRequest)
+        .then(response => {
+          instance.setActiveAccount(response.account);
+        })
+        .catch(error => console.error(error));
+      return;
+    }
+
     const fetchData = async () => {
+      // Lấy token cho active account
       const response = await instance.acquireTokenSilent({
         ...loginRequest,
-        account: accounts[0]
+        account: instance.getActiveAccount()
       });
       const accessToken = response.accessToken;
 
@@ -62,7 +73,7 @@ function App() {
       </table>
 
       {/* Hiển thị OLAP demo khi cần */}
-      {process.env.REACT_APP_USE_OLAP === 'true' && <OlapDemo />}
+      {process.env.REACT_APP_USE_OLAP === 'true' && <Olap />}
     </div>
   );
 }
